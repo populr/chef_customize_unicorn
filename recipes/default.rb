@@ -10,5 +10,5 @@
 config_file = "/srv/www/touchstream/shared/config/unicorn.conf"
 
 execute "update #{config_file} to reconnect to Redis after forking" do
-  command "sed -i -e 's/^\\s*# and Redis.*/  defined?(REDIS) and REDIS.client.reconnect/' #{config_file}"
+  command "sed -i '/after_fork/a\\  defined?(REDIS) and REDIS.client.reconnect' #{config_file}"
 end
